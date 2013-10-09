@@ -37,12 +37,15 @@ void disemvowel(FILE* inputFile, FILE* outputFile) {
    * use fwrite to write that out.
    */
   //get number of chars in input
-  int size;
-  fseek(inputFile, 0, SEEK_END);
-  size = ftell(inputFile);
-  fseek(inputFile, 0, SEEK_SET);
+  int size = 0;
   char* in_buf = calloc(BUF_SIZE, sizeof(char));
-  fread(in_buf, sizeof(char), size, inputFile);
+  fread(in_buf, sizeof(char), BUF_SIZE, inputFile);
+  char a = 'a';
+  while(a != NULL){
+    a = in_buf[size];
+    size++;
+  }
+  size--;
   char* out_buf = calloc(size, sizeof(char));
   int numNonVowels = copy_non_vowels(size, in_buf, out_buf);
   fwrite(out_buf, sizeof(char), numNonVowels, outputFile);
@@ -53,7 +56,7 @@ int main(int argc, char *argv[]) {
   FILE *outputFile;
 
   /* Code that processes the command line arguments and sets up inputFile and outputFile */
-  if(argv[2]) {
+  if(argc == 3) {
     inputFile = fopen( argv[1], "r" );
     outputFile = fopen( argv[2], "w" );
     if (inputFile == 0 ) {
@@ -62,7 +65,7 @@ int main(int argc, char *argv[]) {
     if (outputFile == 0){
       printf( "Could not open output file\n");
     }
-  } else if(argv[1]) {
+  } else if(argc == 2) {
     //Read from argv[1], output to stdout
     inputFile = fopen(argv[1], "r");
     outputFile = stdout;
@@ -73,8 +76,8 @@ int main(int argc, char *argv[]) {
 
   disemvowel(inputFile, outputFile);
 
-  //fclose(inputFile);
- // fclose(outputFile);
+  fclose(inputFile);
+  fclose(outputFile);
 
   return 0;
 }
