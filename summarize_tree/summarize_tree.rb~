@@ -2,17 +2,17 @@
 
 require 'find'
 
-dir-count = 0
+dirCount = 0
 file-count = 0
 
 Find.find(ARGV[0]) do |path|
   if FileTest.directory?(path)
-    dir-count += 1
+    dirCount += 1
   elsif FileTest.file?(path)
-    file-count += 1
+    fileCount += 1
   end
 end
 
 printf("Processed all the files from <#{ARGV[0]}>.\n")
-printf("There were %d directories.\n", dir-count)
-printf("There were %d regular files.\n", file-count)
+printf("There were %d directories.\n", dirCount)
+printf("There were %d regular files.\n", fileCount)

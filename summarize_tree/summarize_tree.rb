@@ -3,7 +3,7 @@
 require 'find'
 
 dirCount = 0
-file-count = 0
+fileCount = 0
 
 Find.find(ARGV[0]) do |path|
   if FileTest.directory?(path)
