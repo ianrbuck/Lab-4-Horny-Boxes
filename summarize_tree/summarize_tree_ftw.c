@@ -28,7 +28,7 @@ if (argc != 2){
   printf("Wrong number of arguments given.\n");
   printf("Expects: 2\n");
   printf("Given: %d\n", argc);
-
+}
   ftw(argv[1], callback, 16);
 
   // Print out the results
