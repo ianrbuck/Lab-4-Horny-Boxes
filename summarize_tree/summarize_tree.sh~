@@ -1,0 +1,5 @@
+#!/bin/bash
+
+
+fileCount=$(find $1 -type f | wc -l)
+dirCount=$(find $1 -type d | wc -l)
